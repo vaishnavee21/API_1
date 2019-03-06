@@ -6,7 +6,7 @@ const healthRoute = require('./health');
 const getUsersRoute = require('./get-user');
 const updateUserRoute = require('./update-user');
 const deleteUserRoute = require('./delete-user');
-
+const loginUserRoute = require('./login-user');
 const membersRoute = require('./members');
 
 /**
@@ -18,6 +18,7 @@ router.use('/createuser', createUserRoute);
 router.use('/getusers', getUsersRoute);
 router.use('/updateuser', updateUserRoute);
 router.use('/deleteuser', deleteUserRoute);
+router.use('/loginuser', loginUserRoute);
 router.use('/members', membersRoute);
 
 

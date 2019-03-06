@@ -106,14 +106,14 @@ exports.updateuser = async (payload) => {
 
 
 /**
- * update user into the users table
+ * delete user into the users table
  *
  * @param  {String} username
  * @param {integer} id
  */
 
 exports.deleteUser = async (payload) => {
-  
+  dbconnection = undefined;
   dbconnection = GetDBConnection();
   return new Promise(async (resolve, reject) => {
     dbconnection("users").where('id', payload.id)
@@ -126,7 +126,6 @@ exports.deleteUser = async (payload) => {
         }
       })
       .catch(error => {
-        GetDBDisconnection(dbconnection);
         reject(error);
       })
       .finally(() => {
@@ -151,3 +150,30 @@ exports.getMembers = async (payload) => {
         });
   })
 };
+
+  /**
+ * login user from the users table
+ *
+ * @param  {String} username
+ */
+exports.loginUser = async (payload) => {
+
+  dbconnection= undefined;
+  dbconnection = GetDBConnection();
+
+  return new Promise(async (resolve, reject) => {
+    dbconnection("users").select('id').where({ username: payload.username, password: payload.password })
+      .then(success => {
+        console.log("hello");
+        resolve(success);
+        
+      })
+      .catch(error => {
+        reject(error);
+      })
+      .finally(() => {
+        GetDBDisconnection(dbconnection);
+      });
+  })
+};
+
